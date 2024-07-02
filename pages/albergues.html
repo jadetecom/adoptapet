@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AdoptaPet - Albergues</title>
+    <!-- CSS Link, Absolute Bootstrap Link & Animate Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/albergues.css"/>
+    <!--SEO Metas-->
+    <meta name="description" content="AdoptaPet es el sitio para buscar y adoptar a tu próxima mascota, ó informar sobre mascotas perdidas o callejeras para ayudarlas a conseguir a su nueva familia.">
+    <meta name="keywords"  content="MASCOTAS, ADOPTAR, PERROS, GATOS, MAPA, AYUDAR, ANIMALES, CALLE, PERDIDOS">
+    <style>
+        .uploaded-photos img {
+            max-width: 100px; 
+            max-height: 100px; 
+            margin-right: 10px; 
+        }
+        table img {
+            max-width: 100px; 
+            height: auto; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-0">
+        <!--Header-->
+        <nav class="navbar navbar-expand-lg navbar-dark header">
+            <a class="navbar-brand" href="index.html">
+                <img src="../media/adoptapet.png" alt="firus">
+            </a>
+            <button class="navbar-toggler mr-4" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item ">
+                    <a class="nav-link" href="../index.html">Inicio</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="buscar.html">Buscar<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="historial.html">Historial</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="albergues.html">Albergue</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="categoria.html">Categorias<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="user/mis_publicaciones.html">Mis publicaciones<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item" id="cambio">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                </ul>
+              </div>
+        </nav>
+        <!--Contenido Principal-->
+        <div class="container">
+            <!--Titulo-->
+            <div class="container__title">
+                <h1>Albergues</h1>
+            </div>
+
+            <!-- Formulario de Registro de Mascotas -->
+            <div class="containerCuadros">
+                <div class="cuadroPrincipal">
+                    <form id="registroForm" class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="nombre">Nombre Albergue</label>
+                                <input type="text" class="form-control" id="nombre" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="foto">Foto</label>
+                                <input type="text" class="form-control" id="foto" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="anio">Años de creacion</label>
+                                <input type="text" class="form-control" id="anio" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="representante">Representante</label>
+                                <input type="text" class="form-control" id="representante" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="numero">Numero</label>
+                                <input type="text" class="form-control" id="numero" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="descripcion">Descripción</label>
+                                <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="direccion">Direccion</label>
+                                <input type="text" class="form-control" id="direccion" required>
+                            </div>
+                        </div>              
+                        <button type="button" class="btn btn-secondary" onclick="guardarRegistro()">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <h2>Lista</h2>
+                <table id="albergueTable" class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Año de Creación</th>
+                            <th>Número</th>
+                            <th>Dirección</th>
+                            <th>Representante</th>
+                            <th>Foto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="albergueTableBody">
+                        <!-- Ejemplo de fila manualmente agregada -->
+                        <!-- <tr>
+                            <td>Albergue La Esperanza</td>
+                            <td>2024/05/05</td>
+                            <td>123456789</td>
+                            <td>Calle Libertad #123, Ciudad Central</td>
+                            <td>Juan Pérez</td>
+                            <td><img src="https://via.placeholder.com/150" alt="Foto Albergue"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Acciones">
+                                    <button type="button" class="btn btn-primary verBtn" data-toggle="modal" data-target="#verModal1">Ver</button>
+                                    <button type="button" class="btn btn-danger eliminarBtn">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="verModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle del Albergue</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido del modal -->
+                    Detalles del albergue aquí...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Publicidad para Redes Sociales-->
+    <div class="container text-center">
+      <h4>Visita nuestras Redes para saber las ultimas noticias!</h4>
+        <hr class="my-4">
+      <div class="container__iconos">
+        <a href="https://www.instagram.com/"><img src="../media/icons/instagram.png" alt="Instagram"></a>
+        <a href="https://www.twitter.com/"><img src="../media/icons/twitter.png" alt="Twitter"></a>
+        <a href="https://www.facebook.com/"><img src="../media/icons/facebook.png" alt="Facebook"></a>
+        <a href="https://www.youtube.com/"><img src="../media/icons/youtube.png" alt="Youtube"></a>
+      </div>
+    </div>
+  <!--Footer-->
+    <nav class="navbar navbar-expand-lg navbar-dark footer justify-content-between">
+      <div class="justify-content-start footer__iconos" id="navbarNav">
+        <a href="https://www.instagram.com/"><img src="../media/icons/instagram.png" alt="Instagram"></a>
+        <a href="https://www.twitter.com/"><img src="../media/icons/twitter.png" alt="Twitter"></a>
+        <a href="https://www.facebook.com/"><img src="../media/icons/facebook.png" alt="Facebook"></a>
+        <a href="https://www.youtube.com/"><img src="../media/icons/youtube.png" alt="Youtube"></a>
+      </div>
+      
+      <div class="footer__title">
+      <p>AdoptaPet ONG</p>
+      </div>
+
+      <div class="justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="buscar.html">Buscar</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="albergues.html">Albergue<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="informar.html">Informar</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="contacto.html">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+        </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Bootstrap y scripts JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        ListarAlbergue();
+      });
+      function ListarAlbergue() {
+        const url = 'https://apimascota.azurewebsites.net/api/Albergue';
+          const token = localStorage.getItem('token');
+          fetch(url, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + token
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              let contenido = "";
+              for(let i = 0; i < data.data.length; i++) {
+                  let fila = "<tr>";
+                    let columna = "<td>" + data.data[i].NombreAlbergue + "</td>";
+                    columna = columna + "<td>" + data.data[i].FechaCrea + "</td>";
+                    columna = columna + "<td>" + data.data[i].Celular + "</td>";
+                    columna = columna + "<td>" + data.data[i].Direccion+ "</td>";
+                    columna = columna + "<td>" + data.data[i].Representante + "</td>";
+                    columna += '<td><img src="'+ data.data[i].Foto+'" alt="Logo de HTML5" width="100" height="100" /></td>';  
+                    columna += '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarAlbergue(' + data.data[i].IdAlbergue + ')">Eliminar</button></td>';  
+                    fila = columna + "</tr>"
+                    contenido = contenido + fila;
+              }   
+              document.getElementById("albergueTableBody").innerHTML = contenido;
+          })
+          .catch(error => {
+            console.error('Error al obtener las Mascota:', error);
+          });
+      }
+        function guardarRegistro() {
+            let nombreAlbergue = document.getElementById("nombre").value;
+            let foto = document.getElementById("foto").value;
+            let fechaCrea = document.getElementById("anio").value;
+            let representante = document.getElementById("representante").value;
+            let celular = document.getElementById("numero").value;
+            let descripcion = document.getElementById("descripcion").value;
+            let direccion = document.getElementById("direccion").value;
+
+            const token = localStorage.getItem('token');
+
+            const url = 'https://apimascota.azurewebsites.net/api/Albergue';
+            const data = {
+                "nombreAlbergue": nombreAlbergue,
+                "foto": foto,
+                "fechaCrea": fechaCrea,
+                "representante": representante,
+                "celular": celular,
+                "descripcion": descripcion,
+                "direccion": direccion
+            };
+            fetch(url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token  
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                if (data.codigo > 0) {
+                    alert('Se Registro correctamente');
+                    document.getElementById("nombre").value        = "";
+                    document.getElementById("foto").value          = "";
+                    document.getElementById("anio").value          = "";
+                    document.getElementById("representante").value = "";
+                    document.getElementById("numero").value        = "";
+                    document.getElementById("descripcion").value   = "";
+                    document.getElementById("direccion").value     = "";
+                    ListarAlbergue();
+                } else {
+                    alert(data.mensaje);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        function eliminarAlbergue(id) {
+          const url = "https://apimascota.azurewebsites.net/api/Albergue/" + id; // URL dinámica basada en el ID
+          const token = localStorage.getItem('token'); // Recuperar el token del localStorage
+
+          fetch(url, {
+              method: 'DELETE', // Método HTTP para eliminar
+              headers: {
+                  'Authorization': 'Bearer ' + token, // Incluir el token en el header
+                  'Content-Type': 'application/json' // Aunque no se envíe body, algunos servidores esperan este header
+              }
+          })
+          .then(response => {
+            console.log("data1");
+            console.log(response);
+          })
+          .then(data => {
+            console.log("data");
+            console.log(data);
+            ListarAlbergue();
+          })
+          .catch(error => {
+          });
+      }
+    </script>
+
+</body>
+</html>

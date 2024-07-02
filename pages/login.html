@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/index2.css">
+</head>
+<body>
+    <section>
+        <article class="sector1">
+            <img src="img/fondoGato.jpg" id="izquierdo">
+        </article>
+        <article class="sector2">
+            <div class="contenedor">
+                <div class="row">
+                    <h1 class="centrado">LOGIN</h1>
+                </div>
+                <div class="row">
+                    <h3 class="centrado">Inicio sesion con tus datos</h3>
+                </div>
+                <div class="bloque">
+                    <form action="crearCita.html">
+                        <div class="row">
+                             <div class="col-3">
+                                 <label for="">Email</label>
+                             </div>
+                             <div class="col-8">
+                                <input type="email" class="ajuste" id="correo" placeholder="Tu email" required>
+                             </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="">Password</label>
+                            </div>
+                            <div class="col-8">
+                               <input type="password" class="ajuste" id="password" placeholder="Tu password" required>
+                            </div>
+                       </div>
+                       <div class="row">
+                            <button type="button" id="iniciarSesion">
+                                Iniciar Sesion
+                            </button>
+                       </div>
+                    </form>
+                    <div class="row centrado">
+                        <a href="registrar.html">¿Aun no tienes una cuenta? Crea Una</a>
+                    </div>
+                    <div class="row centrado">
+                        <a href="recuperar.html">¿Recuperar Contraseña? Aqui</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script>
+        document.getElementById('iniciarSesion').addEventListener('click', function() {
+            const usuario = document.getElementById('correo').value;
+            const clave = document.getElementById('password').value;
+            const palabraClave = "";
+        
+            const url = 'https://apimascota.azurewebsites.net/api/Usuario/Login';
+            const data = {
+                usuario: usuario,
+                clave: clave,
+                palabraClave: palabraClave
+            };
+        
+            fetch(url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                if (data.codigo > 0 && data.token) {
+                    // Almacenar token y usuario en localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('usuario', usuario);
+                    localStorage.setItem('clave', data.data.clave);
+                    alert('Sesión iniciada correctamente');
+                    window.location.href = '../index.html';
+                } else {
+                    alert('Error en el inicio de sesión');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/registrar.css">
+</head>
+<body>
+    <section>
+        <article class="sector1">
+            <img src="img/fondoGato.jpg" id="izquierdo">
+        </article>
+        <article class="sector2">
+            <div class="contenedor">
+                <div class="row">
+                    <h1 class="centrado">REGISTRAR</h1>
+                </div>
+                <div class="row">
+                    <h3 class="centrado">Regístrate con tus datos</h3>
+                </div>
+                <div class="bloque">
+                    <form action="../index.html" method="POST">
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="nombre">Nombre</label>
+                            </div>
+                            <div class="col-8">
+                               <input type="text" class="ajuste" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                            </div>
+                       </div>
+                       <div class="row">
+                             <div class="col-3">
+                                 <label for="apellido">Apellido</label>
+                             </div>
+                             <div class="col-8">
+                                <input type="text" class="ajuste" id="apellido" name="apellido" placeholder="Tu Apellido" required>
+                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="celular">Celular</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="tel" class="ajuste" id="celular" name="celular" placeholder="Tu Celular" required>
+                            </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-3">
+                                <label for="direccion">Dirección</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="tel" class="ajuste" id="direccion" name="direccion" placeholder="Tu Dirección" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="tel" class="ajuste" id="email" name="email" placeholder="Tu Email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="col-8">
+                               <input type="password" class="ajuste" id="password" name="password" placeholder="Tu password" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="palabraClave">P Clave</label>
+                            </div>
+                            <div class="col-8">
+                               <input type="text" class="ajuste" id="palabraClave" name="palabraClave" placeholder="Tu Palabra Clave" required>
+                        </div>
+                       <div class="row">
+                            <div class="col-3">
+                                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="date" class="ajuste" id="fechaNacimiento" name="fechaNacimiento" required>
+                            </div>
+                       </div>
+                       
+                       <div class="row">
+                            <button type="button" id="registrar">
+                                Registrarse
+                            </button>
+                       </div> 
+                    </form>
+                    <div class="row centrado">
+                        <a href="login.html">Si ya cuentas con una cuenta, ingresa aquí</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script>
+        document.getElementById('registrar').addEventListener('click', function() {
+
+                const nombre = document.getElementById('nombre').value;
+                const apellido = document.getElementById('apellido').value;
+                const celular = document.getElementById('celular').value;
+                const correo = document.getElementById('email').value;
+                const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+                const direccion = document.getElementById('direccion').value;
+                const estado = "1";
+                const password = document.getElementById('password').value;
+                const palabraClave = document.getElementById('palabraClave').value;
+                const data = {
+                    nombre: nombre,
+                    apellido: apellido,
+                    celular: celular,
+                    correo: correo,
+                    fechaNacimeinto: fechaNacimiento, 
+                    direccion: direccion,
+                    estado: estado,
+                    usuarioBE: {
+                        usuario: correo,
+                        clave: password,
+                        palabraClave: palabraClave
+                    }
+                };
+        
+                const url = 'https://apimascota.azurewebsites.net/api/Usuario/Registro';
+                console.log(data)
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert('Registro completado con éxito');
+                    window.location.href = '../index.html';
+                })
+                .catch((error) => {
+                    alert('Error al realizar el registro');
+                });
+
+        });
+        </script>
+</body>
+</html>
