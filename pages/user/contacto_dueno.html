@@ -72,13 +72,13 @@
               <div class="row">
                 <!-- Columna para la imagen y datos de la mascota -->
                 <div class="col-md-6">
-                  <img src="../../media/adopciones/perro2.jpg" class="card-img-top" alt="...">
-                  <div class="uploaded-photos">
+                  <img src="../../media/adopciones/perro2.jpg" id="fotoMascota" class="card-img-top" alt="...">
+                  <!-- <div class="uploaded-photos">
                     <img src="../../media/adopciones/perro3.jpg" alt="Foto 1">
                     <img src="../../media/adopciones/perro4.jpg" alt="Foto 2">
                     <img src="../../media/adopciones/perro6.jpg" alt="Foto 3">
                     <img src="../../media/adopciones/perro7.jpg" alt="Foto 4">
-                  </div>
+                  </div> -->
                   <div class="card-body">
                     <h3 class="card-title"><span id="nombreCategoria">nombreCategoria</span></h3>
                     <p class="card-text" id="descripcionMascota">descripcionMascota</p>
@@ -250,6 +250,7 @@
               document.getElementById("direccion").innerHTML = '<span>' + data.data[0].direccion + '</span>';
               document.getElementById("idMascota").value = data.data[0].idAnimal;
               document.getElementById("idUsuario").value = localStorage.getItem('clave');
+              document.getElementById('fotoMascota').src = data.data[0].foto;
           })
           .catch(error => {
             console.error('Error al obtener las categorías:', error);
