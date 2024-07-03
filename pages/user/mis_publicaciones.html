@@ -319,14 +319,22 @@
           // Recuperar el token del localStorage
           const token = localStorage.getItem('token');
 
-          const url = 'https://apimascota.azurewebsites.net/api/Foto/0/urlfoto/' +url2+ '/idanimal/' + id;
+          const url = 'https://apimascota.azurewebsites.net/api/Foto';
+          const data = {
+            "idFoto": 0,
+            "urlFoto": url2,
+            "idAnimal": id
+          };
+          
+          
           console.log(url);
           fetch(url, {
-              method: 'GET',
+              method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + token
-              }
+              },
+              body: JSON.stringify(data),
           })
           .then(response => response.json())
           .then(data => {
