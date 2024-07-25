@@ -46,11 +46,11 @@
                   <li class="nav-item">
                     <a class="nav-link" href="historial.html">Historial</a>
                   </li>
-                  <li class="nav-item active" id="borrar1">
-                    <a class="nav-link" href="albergues.html">Albergue <span class="sr-only">(current)</span></a>
+                  <li class="nav-item" id="borrar1">
+                    <a class="nav-link" href="albergues.html">Albergue</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="buscar_albergue.html">Buscar Albergue</a>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="buscar_albergue.html">Buscar Albergue <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item" id="borrar2">
                     <a class="nav-link" href="categoria.html">Categorias</a>
@@ -68,79 +68,27 @@
         <div class="container">
             <!--Titulo-->
             <div class="container__title">
-                <h1>Albergues</h1>
+                <h1>Listado de Albergues</h1>
             </div>
 
-            <!-- Formulario de Registro de Mascotas -->
-            <div class="containerCuadros">
-                <div class="cuadroPrincipal">
-                    <form id="registroForm" class="needs-validation" novalidate>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="nombre">Nombre Albergue</label>
-                                <input type="text" class="form-control" id="nombre" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="foto">Foto</label>
-                                <input type="text" class="form-control" id="foto" required>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="anio">Años de creacion</label>
-                                <input type="date" class="form-control" id="anio" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="representante">Representante</label>
-                                <input type="text" class="form-control" id="representante" required>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="numero">Numero</label>
-                                <input type="text" class="form-control" id="numero" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-8">
-                                <label for="descripcion">Descripción</label>
-                                <textarea class="form-control" id="descripcion" rows="3" required></textarea>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="direccion">Direccion</label>
-                                <input type="text" class="form-control" id="direccion" required>
-                            </div>
-                        </div>              
-                        <button type="button" class="btn btn-secondary" onclick="guardarRegistro()">Guardar</button>
-                    </form>
+            <div class="container mt-3">
+                <!-- Barra de búsqueda -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Buscar albergue...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchTable()">Buscar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="container mt-5">
-                <h2>Lista</h2>
                 <table id="albergueTable" class="table table-striped mt-3">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Año de Creación</th>
-                            <th>Número</th>
-                            <th>Dirección</th>
                             <th>Representante</th>
-                            <th>Foto</th>
+                            <th>Año de Creación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="albergueTableBody">
-                        <!-- Ejemplo de fila manualmente agregada -->
-                        <!-- <tr>
-                            <td>Albergue La Esperanza</td>
-                            <td>2024/05/05</td>
-                            <td>123456789</td>
-                            <td>Calle Libertad #123, Ciudad Central</td>
-                            <td>Juan Pérez</td>
-                            <td><img src="https://via.placeholder.com/150" alt="Foto Albergue"></td>
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Acciones">
-                                    <button type="button" class="btn btn-primary verBtn" data-toggle="modal" data-target="#verModal1">Ver</button>
-                                    <button type="button" class="btn btn-danger eliminarBtn">Eliminar</button>
-                                </div>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -158,8 +106,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Contenido del modal -->
-                    Detalles del albergue aquí...
+                    <div class="text-center">
+                        <img id="albergueLogo" src="" alt="Logo del Albergue" class="img-fluid mb-3" style="max-height: 150px;">
+                    </div>
+                    <p><strong>Nombre:</strong> <span id="albergueNombre"></span></p>
+                    <p><strong>Fecha de Creación:</strong> <span id="albergueFecha"></span></p>
+                    <p><strong>Representante:</strong> <span id="albergueRepresentante"></span></p>
+                    <p><strong>Celular:</strong> <span id="albergueCelular"></span></p>
+                    <p><strong>Dirección:</strong> <span id="albergueDireccion"></span></p>
+                    <p><strong>Descripción:</strong> <span id="albergueDescripcion"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -167,9 +122,10 @@
             </div>
         </div>
     </div>
+
     <!--Publicidad para Redes Sociales-->
     <div class="container text-center">
-      <h4>Visita nuestras Redes para saber las ultimas noticias!</h4>
+      <h4>Visita nuestras Redes para saber las últimas noticias!</h4>
         <hr class="my-4">
       <div class="container__iconos">
         <a href="https://www.instagram.com/"><img src="../media/icons/instagram.png" alt="Instagram"></a>
@@ -178,7 +134,8 @@
         <a href="https://www.youtube.com/"><img src="../media/icons/youtube.png" alt="Youtube"></a>
       </div>
     </div>
-  <!--Footer-->
+
+    <!--Footer-->
     <nav class="navbar navbar-expand-lg navbar-dark footer justify-content-between">
       <div class="justify-content-start footer__iconos" id="navbarNav">
         <a href="https://www.instagram.com/"><img src="../media/icons/instagram.png" alt="Instagram"></a>
@@ -200,7 +157,7 @@
             <a class="nav-link" href="buscar.html">Buscar</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="albergues.html">Albergue<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="buscar_albergue.html">Buscar Albergue<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="informar.html">Informar</a>
@@ -214,11 +171,14 @@
         </ul>
       </div>
     </nav>
+
     <!-- Bootstrap y scripts JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+        let arrayAlbergue = new Array();
+     document.addEventListener('DOMContentLoaded', function() {
         ListarAlbergue();
         if(localStorage.getItem('clave') != 1) {
           document.getElementById("borrar1").innerHTML = ''
@@ -242,16 +202,36 @@
           })
           .then(response => response.json())
           .then(data => {
+            arrayAlbergue = data.data
               let contenido = "";
+
+            //   <tr>
+            //         <td>Albergue La Esperanza</td>
+            //         <td>Juan Pérez</td>
+            //         <td>2024/05/05</td>
+            //         <td>
+            //             <div class="btn-group" role="group" aria-label="Acciones">
+            //                 <button type="button" class="btn btn-danger eliminarBtn">Donar</button>
+            //                 <button type="button" class="btn btn-primary verBtn" data-toggle="modal" data-target="#verModal1">Ver</button>
+            //             </div>
+            //         </td>
+            //     </tr>
+                console.log(data.data)
               for(let i = 0; i < data.data.length; i++) {
                   let fila = "<tr>";
                     let columna = "<td>" + data.data[i].NombreAlbergue + "</td>";
-                    columna = columna + "<td>" + data.data[i].FechaCrea + "</td>";
-                    columna = columna + "<td>" + data.data[i].Celular + "</td>";
-                    columna = columna + "<td>" + data.data[i].Direccion+ "</td>";
                     columna = columna + "<td>" + data.data[i].Representante + "</td>";
-                    columna += '<td><img src="'+ data.data[i].Foto+'" alt="Logo de HTML5" width="100" height="100" /></td>';  
-                    columna += '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarAlbergue(' + data.data[i].IdAlbergue + ')">Eliminar</button></td>';  
+                    columna = columna + "<td>" + data.data[i].FechaCrea + "</td>";
+                    let td = "";
+                    td = "<div class='btn-group' role='group' aria-label='Acciones'>";
+                        td = td + "<button type='button' class='btn btn-primary verBtn' data-toggle='modal' onClick = 'VerDatos(" + data.data[i].IdAlbergue+ ")'>Ver</button>"
+                    td = td + "</div>"
+                    columna = columna + "<td>" + td + "</td>";
+                    // columna = columna + "<td>" + data.data[i].Celular + "</td>";
+                    // columna = columna + "<td>" + data.data[i].Direccion+ "</td>";
+                    // columna += '<td><img src="'+ data.data[i].Foto+'" alt="Logo de HTML5" width="100" height="100" /></td>';  
+                    // columna += '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarAlbergue(' + data.data[i].IdAlbergue + ')">Eliminar</button></td>';  
+                    
                     fila = columna + "</tr>"
                     contenido = contenido + fila;
               }   
@@ -261,80 +241,50 @@
             console.error('Error al obtener las Mascota:', error);
           });
       }
-        function guardarRegistro() {
-            let nombreAlbergue = document.getElementById("nombre").value;
-            let foto = document.getElementById("foto").value;
-            let fechaCrea = document.getElementById("anio").value;
-            let representante = document.getElementById("representante").value;
-            let celular = document.getElementById("numero").value;
-            let descripcion = document.getElementById("descripcion").value;
-            let direccion = document.getElementById("direccion").value;
-
-            const token = localStorage.getItem('token');
-
-            const url = 'https://apimascota.azurewebsites.net/api/Albergue';
-            const data = {
-                "nombreAlbergue": nombreAlbergue,
-                "foto": foto,
-                "fechaCrea": fechaCrea,
-                "representante": representante,
-                "celular": celular,
-                "descripcion": descripcion,
-                "direccion": direccion
-            };
-            fetch(url, {
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token  
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                if (data.codigo > 0) {
-                    alert('Se Registro correctamente');
-                    document.getElementById("nombre").value        = "";
-                    document.getElementById("foto").value          = "";
-                    document.getElementById("anio").value          = "";
-                    document.getElementById("representante").value = "";
-                    document.getElementById("numero").value        = "";
-                    document.getElementById("descripcion").value   = "";
-                    document.getElementById("direccion").value     = "";
-                    ListarAlbergue();
-                } else {
-                    alert(data.mensaje);
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-        function eliminarAlbergue(id) {
-          const url = "https://apimascota.azurewebsites.net/api/Albergue/" + id; // URL dinámica basada en el ID
-          const token = localStorage.getItem('token'); // Recuperar el token del localStorage
-
-          fetch(url, {
-              method: 'DELETE', // Método HTTP para eliminar
-              headers: {
-                  'Authorization': 'Bearer ' + token, // Incluir el token en el header
-                  'Content-Type': 'application/json' // Aunque no se envíe body, algunos servidores esperan este header
-              }
-          })
-          .then(response => {
-            console.log("data1");
-            console.log(response);
-          })
-          .then(data => {
-            console.log("data");
-            console.log(data);
+      function VerDatos(id) {
+        console.log(arrayAlbergue);
+        for(let i = 0; i < arrayAlbergue.length; i++) {
+            if(arrayAlbergue[i].IdAlbergue == id) {
+                document.getElementById('albergueNombre').textContent =arrayAlbergue[i].NombreAlbergue;
+                document.getElementById('albergueFecha').textContent = arrayAlbergue[i].FechaCrea;
+                document.getElementById('albergueRepresentante').textContent = arrayAlbergue[i].Representante;
+                document.getElementById('albergueCelular').textContent = arrayAlbergue[i].Celular;
+                document.getElementById('albergueDireccion').textContent = arrayAlbergue[i].Direccion;
+                document.getElementById('albergueDescripcion').textContent = arrayAlbergue[i].Descripcion;
+                document.getElementById('albergueLogo').src = arrayAlbergue[i].Foto;
+                $("#verModal1").modal("show");
+                break;
+            }
+        } 
+      }
+      function searchTable() {
+        let buscar = document.getElementById("searchInput").value
+        let contenido = "";
+        for(let i = 0; i < arrayAlbergue.length; i++) {
+            if(arrayAlbergue[i].NombreAlbergue.toLowerCase().includes(buscar.toLowerCase())) {
+                let fila = "<tr>";
+                    let columna = "<td>" + arrayAlbergue[i].NombreAlbergue + "</td>";
+                    columna = columna + "<td>" + arrayAlbergue[i].Representante + "</td>";
+                    columna = columna + "<td>" + arrayAlbergue[i].FechaCrea + "</td>";
+                    let td = "";
+                    td = "<div class='btn-group' role='group' aria-label='Acciones'>";
+                        td = td + "<button type='button' class='btn btn-primary verBtn' data-toggle='modal' onClick = 'VerDatos(" + arrayAlbergue[i].IdAlbergue+ ")'>Ver</button>"
+                    td = td + "</div>"
+                    columna = columna + "<td>" + td + "</td>";
+                    // columna = columna + "<td>" + data.data[i].Celular + "</td>";
+                    // columna = columna + "<td>" + data.data[i].Direccion+ "</td>";
+                    // columna += '<td><img src="'+ data.data[i].Foto+'" alt="Logo de HTML5" width="100" height="100" /></td>';  
+                    // columna += '<td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarAlbergue(' + data.data[i].IdAlbergue + ')">Eliminar</button></td>';  
+                    
+                    fila = columna + "</tr>"
+                    contenido = contenido + fila;
+            }
+        } 
+        document.getElementById("albergueTableBody").innerHTML = contenido;
+        if(buscar == "") {
             ListarAlbergue();
-          })
-          .catch(error => {
-          });
+        }
       }
     </script>
-
 </body>
 </html>

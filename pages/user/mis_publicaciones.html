@@ -43,17 +43,20 @@
                     <li class="nav-item">
                       <a class="nav-link" href="../buscar.html">Buscar</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                       <a class="nav-link" href="../historial.html">Historial</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item" id="borrar1">
                       <a class="nav-link" href="../albergues.html">Albergue</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="../categoria.html">Categoria <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="../buscar_albergue.html">Buscar Albergue</a>
+                    </li>
+                    <li class="nav-item" id="borrar2">
+                      <a class="nav-link" href="../categoria.html">Categoria</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="mis_publicaciones.html">Registro Mascota</a>
+                      <a class="nav-link" href="mis_publicaciones.html">Mis publicaciones<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="cambio">
                       <a class="nav-link" href="../login.html">Login</a>
@@ -230,6 +233,15 @@
         ListarCategoria();
         if(localStorage.getItem('token') == null || localStorage.getItem('token') == "") {
           document.getElementById("cambio").innerHTML = '<a class="nav-link" href="../login.html">Login</a>';
+        }else {
+          document.getElementById("cambio").innerHTML = '<a class="nav-link" href="../login.html">Cerrar Sesion</a>';
+        }
+        if(localStorage.getItem('clave') != 1) {
+          document.getElementById("borrar1").innerHTML = ''
+          document.getElementById("borrar2").innerHTML = ''
+        }
+        if(localStorage.getItem('token') == null || localStorage.getItem('token') == "") {
+          document.getElementById("cambio").innerHTML = '<a class="nav-link" href="pages/login.html">Login</a>';
         }else {
           document.getElementById("cambio").innerHTML = '<a class="nav-link" href="../login.html">Cerrar Sesion</a>';
         }

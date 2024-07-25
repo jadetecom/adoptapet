@@ -32,13 +32,16 @@
                     <li class="nav-item">
                       <a class="nav-link" href="pages/buscar.html">Buscar</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                       <a class="nav-link" href="pages/historial.html">Historial</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item" id="borrar1">
                       <a class="nav-link" href="pages/albergues.html">Albergue</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="pages/buscar_albergue.html">Buscar Albergue</a>
+                    </li>
+                    <li class="nav-item" id="borrar2">
                       <a class="nav-link" href="pages/categoria.html">Categoria</a>
                     </li>
                     <li class="nav-item">
@@ -46,7 +49,7 @@
                     </li>
                     <li class="nav-item" id="cambio">
                       <a class="nav-link" href="pages/login.html">Login</a>
-                  </li>
+                   </li>
                   </ul>
                 </div>
         </nav>
@@ -221,6 +224,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        if(localStorage.getItem('clave') != 1) {
+          document.getElementById("borrar1").innerHTML = ''
+          document.getElementById("borrar2").innerHTML = ''
+        }
         if(localStorage.getItem('token') == null || localStorage.getItem('token') == "") {
           document.getElementById("cambio").innerHTML = '<a class="nav-link" href="pages/login.html">Login</a>';
         }else {
